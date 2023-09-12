@@ -1,7 +1,6 @@
 package ru.otus.klepov.homeworks.hw3;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Box<T extends Fruit> {
