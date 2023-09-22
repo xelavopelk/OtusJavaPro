@@ -1,11 +1,12 @@
 package ru.otus.klepov.homeworks.hw6;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
-@Target(ElementType.METHOD)     // чтобы использовать для класса
-@Retention(RetentionPolicy.RUNTIME)  // хотим чтобы наша аннотация дожила до рантайма
+/**
+ * Функция-тест. Использовать для класса. Аннотация доживает до рантайма.
+ */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface Test {
 }

@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -31,7 +32,7 @@ public class TestCaseFactoryImpl implements TestCaseFactory {
         var cls = reader.lines()
                 .filter(line -> line.equals(className+".class"))
                 .map(line -> getClass(line, pkg))
-                .filter( cl -> cl!=null)
+                .filter(Objects::nonNull)
                 .limit(1)
                 .collect(Collectors.toList());
         if (cls.size()!=1) {throw new RuntimeException("Shit happens!");}

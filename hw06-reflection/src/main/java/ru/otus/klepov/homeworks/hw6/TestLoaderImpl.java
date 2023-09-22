@@ -24,7 +24,7 @@ public class TestLoaderImpl implements TestLoader {
                 success++;
             }
             catch (Exception ex) {
-                log.log(Level.WARNING, String.format("ERROR MESS=%s; StackTrace=%s",ex.getMessage(),ex.getStackTrace().toString()));
+                log.log(Level.WARNING, String.format("ERROR MESS=%s; StackTrace=%s",ex.getCause().getMessage(),ex.getStackTrace().toString()));
             }
         }
         log.info(String.format("Finish test %s; count=%d, successes=%d, failed=%d",tcFactory.getClassName(), tc.size(),success,tc.size()-success));

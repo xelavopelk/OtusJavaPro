@@ -1,8 +1,5 @@
 package ru.otus.klepov.homeworks.hw6;
 
-import ru.otus.klepov.homeworks.hw6.After;
-import ru.otus.klepov.homeworks.hw6.Before;
-
 public class NoTestSimpleJUnitTest {
     private int t = 0;
     @Before

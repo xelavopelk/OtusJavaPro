@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 
 public class Program {
-    public static void main(String[] args) throws NoSuchMethodException {
+    public static void main(String[] args) {
         Arrays.asList("SimpleJUnitTest", "NoTestSimpleJUnitTest")
                 .stream()
-                .map(tc -> new TestCaseFactoryImpl(tc))
-                .map(tf -> new TestLoaderImpl(tf))
-                .forEach(tl -> tl.run());
+                .map(TestCaseFactoryImpl::new)
+                .map(TestLoaderImpl::new)
+                .forEach(TestLoaderImpl::run);
     }
 }

@@ -21,7 +21,7 @@ public class SimpleJUnitTest {
     @Test
     public void testEx() {
         t++;
-        throw new RuntimeException("Ой больно мне больно!");
+        throw new RuntimeException("Oj bol`no mne bol`no!");
     }
 
     public static int testStatic() {
