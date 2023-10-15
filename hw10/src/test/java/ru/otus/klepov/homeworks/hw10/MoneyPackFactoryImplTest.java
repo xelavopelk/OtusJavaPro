@@ -10,13 +10,13 @@ public class MoneyPackFactoryImplTest {
     private MoneyPackFactory mpf;
 
     @BeforeEach
-    public void init(){
-        mpf=new MoneyPackFactoryImpl(100,10000);
+    public void init() {
+        mpf = new MoneyPackFactoryImpl(100, 10000);
     }
 
     @Test
-    public void happyPath(){
-        var res = mpf.create(new MoneyPack[]{mpf.create(3,10), mpf.create(3,15)});
-        assertEquals(res, mpf.create(3,25));
+    public void happyPathSuccess() {
+        var res = mpf.create(new MoneyPack[]{mpf.create(3, 10), mpf.create(3, 15)});
+        assertEquals(res, mpf.create(3, 25));
     }
 }

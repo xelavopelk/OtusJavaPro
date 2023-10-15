@@ -6,6 +6,7 @@ package ru.otus.klepov.homeworks.hw10;
 public interface MoneyBox extends MoneyPack {
 
     void putMoney(MoneyPack notes) throws IllegalArgumentException;
+
     void getMoney(Integer notes) throws IndexOutOfBoundsException;
 
 }

@@ -11,11 +11,12 @@ public class CashMachineImpl implements CashMachine {
     private final MoneyPackFactory mpf;
     private final MoneyBoxFactory mbf;
     private final Map<Integer, MoneyBox> moneyBoxes;
+
     public CashMachineImpl(ChangeStrategy changeStrategy, MoneyPackFactory mpf, MoneyBoxFactory mbf) {
-        this.changeStrategy=changeStrategy;
-        this.moneyBoxes=new HashMap<>();
-        this.mpf=mpf;
-        this.mbf=mbf;
+        this.changeStrategy = changeStrategy;
+        this.moneyBoxes = new HashMap<>();
+        this.mpf = mpf;
+        this.mbf = mbf;
     }
 
     @Override
@@ -23,18 +24,17 @@ public class CashMachineImpl implements CashMachine {
         for (var item : notes) {
             moneyBoxes
                     .merge(item.getNominal(), new MoneyBoxImpl(item), (oldV, newV)
-                            ->  new MoneyBoxImpl(mpf.create(new MoneyPack[] {oldV, newV})));
+                            -> new MoneyBoxImpl(mpf.create(new MoneyPack[]{oldV, newV})));
         }
     }
 
     @Override
     public Optional<List<MoneyPack>> getMoney(Integer summa) {
-        var change=changeStrategy.getChange(moneyBoxes.values().stream().map(mbf::Create).collect(Collectors.toList()), summa);
-        if (change.isEmpty()){
+        var change = changeStrategy.getChange(moneyBoxes.values().stream().map(mbf::Create).collect(Collectors.toList()), summa);
+        if (change.isEmpty()) {
             return Optional.empty();
-        }
-        else {
-            for(var item: change.get()){
+        } else {
+            for (var item : change.get()) {
                 moneyBoxes.get(item.getNominal()).getMoney(item.getCount());
             }
             return change;
@@ -43,9 +43,9 @@ public class CashMachineImpl implements CashMachine {
 
     @Override
     public Integer getBalance() {
-        var res =0;
-        for(var item: moneyBoxes.values()) {
-            res+=item.getSumma();
+        var res = 0;
+        for (var item : moneyBoxes.values()) {
+            res += item.getSumma();
         }
         return res;
     }

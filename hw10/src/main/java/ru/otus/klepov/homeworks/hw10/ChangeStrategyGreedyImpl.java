@@ -7,25 +7,25 @@ public class ChangeStrategyGreedyImpl implements ChangeStrategy {
     private Optional<List<MoneyPack>> getChangeInner(List<MoneyPack> boxes, int summa) {
         var outMoney = new ArrayList<MoneyPack>();
         var needMoney = summa;
-        for(var i=0;i<boxes.size();i++) {
+        for (var i = 0; i < boxes.size(); i++) {
             var nominal = boxes.get(i).getNominal();
-            Integer cow = needMoney/nominal;
-            if (cow>boxes.get(i).getCount()) break;
-            if (cow>0) {
+            Integer cow = needMoney / nominal;
+            if (cow > boxes.get(i).getCount()) break;
+            if (cow > 0) {
                 var pack = new MoneyPackImpl(nominal, cow);
                 outMoney.add(pack);
                 needMoney -= pack.getSumma();
             }
-            if (needMoney==0) break;
+            if (needMoney == 0) break;
         }
-        return needMoney>0 ? Optional.empty() : Optional.of(outMoney);
+        return needMoney > 0 ? Optional.empty() : Optional.of(outMoney);
     }
+
     @Override
     public Optional<List<MoneyPack>> getChange(List<MoneyPack> boxes, int summa) {
-        if (boxes.size()<1 || summa<1) {
+        if (boxes.size() < 1 || summa < 1) {
             return Optional.empty();
-        }
-        else {
+        } else {
             var sorted = boxes
                     .stream()
                     .sorted(Comparator.comparingInt(MoneyPack::getNominal).reversed())

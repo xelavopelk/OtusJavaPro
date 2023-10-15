@@ -5,6 +5,8 @@ package ru.otus.klepov.homeworks.hw10;
  */
 public interface MoneyPack {
     Integer getCount();
+
     Integer getSumma();
+
     Integer getNominal();
 }
