@@ -2,6 +2,10 @@ package ru.otus.klepov.homeworks.hw10;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.otus.klepov.homeworks.hw10.domain.*;
+import ru.otus.klepov.homeworks.hw10.service.CashMachine;
+import ru.otus.klepov.homeworks.hw10.service.CashMachineImpl;
+import ru.otus.klepov.homeworks.hw10.service.ChangeStrategyGreedyImpl;
 
 import java.util.ArrayList;
 import java.util.Optional;

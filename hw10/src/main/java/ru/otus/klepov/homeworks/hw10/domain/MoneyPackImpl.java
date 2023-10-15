@@ -1,4 +1,4 @@
-package ru.otus.klepov.homeworks.hw10;
+package ru.otus.klepov.homeworks.hw10.domain;
 
 public class MoneyPackImpl implements MoneyPack {
     public final Integer nominal;

@@ -1,4 +1,6 @@
-package ru.otus.klepov.homeworks.hw10;
+package ru.otus.klepov.homeworks.hw10.service;
+
+import ru.otus.klepov.homeworks.hw10.domain.*;
 
 import java.util.HashMap;
 import java.util.List;

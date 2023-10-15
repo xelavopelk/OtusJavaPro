@@ -3,9 +3,12 @@ package ru.otus.klepov.homeworks.hw10;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import ru.otus.klepov.homeworks.hw10.domain.MoneyPack;
+import ru.otus.klepov.homeworks.hw10.domain.MoneyPackFactory;
+import ru.otus.klepov.homeworks.hw10.domain.MoneyPackFactoryImpl;
+import ru.otus.klepov.homeworks.hw10.service.ChangeStrategyGreedyImpl;
 
 public class ChangeStrategyImplTest {
 

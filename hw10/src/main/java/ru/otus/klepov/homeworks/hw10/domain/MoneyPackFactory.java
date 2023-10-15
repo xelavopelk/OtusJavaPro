@@ -1,4 +1,4 @@
-package ru.otus.klepov.homeworks.hw10;
+package ru.otus.klepov.homeworks.hw10.domain;
 
 /*
 Бизнес-логика с констрейнтами по созданию пачки денег

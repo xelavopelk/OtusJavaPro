@@ -1,4 +1,7 @@
-package ru.otus.klepov.homeworks.hw10;
+package ru.otus.klepov.homeworks.hw10.service;
+
+import ru.otus.klepov.homeworks.hw10.domain.MoneyPack;
+import ru.otus.klepov.homeworks.hw10.domain.MoneyPackImpl;
 
 import java.util.*;
 import java.util.stream.Collectors;
