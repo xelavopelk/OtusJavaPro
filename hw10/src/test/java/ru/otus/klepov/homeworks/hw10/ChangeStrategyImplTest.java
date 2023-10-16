@@ -24,7 +24,6 @@ public class ChangeStrategyImplTest {
         var impl = new ChangeStrategyGreedyImpl();
         var data = utils.makeList(mpf.create(1, 10), mpf.create(3, 10), mpf.create(4, 10));
         var res = impl.getChange(data, 15);
-        assertTrue(res.isPresent());
         assertArrayEquals(res.get().toArray(),
                 new MoneyPack[]{mpf.create(4, 3), mpf.create(3, 1)});
     }

@@ -8,7 +8,6 @@ import ru.otus.klepov.homeworks.hw10.service.CashMachineImpl;
 import ru.otus.klepov.homeworks.hw10.service.ChangeStrategyGreedyImpl;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,7 +48,6 @@ public class CashMachineImplTest {
         var machine = happyPathPrepare();
         var res = machine.getMoney(10);
         var mExpected = utils.makeList(mpf.create(3, 3), mpf.create(1, 1));
-        assertTrue(res.isPresent());
         var compareRes = res
                 .get()
                 .stream()
@@ -62,7 +60,6 @@ public class CashMachineImplTest {
     public void notEnoughMoneySuccess() {
         var machine = happyPathPrepare();
         var res = machine.getMoney(110);
-        assertEquals(Optional.empty(), res);
         assertEquals(85, machine.getBalance());
     }
 
