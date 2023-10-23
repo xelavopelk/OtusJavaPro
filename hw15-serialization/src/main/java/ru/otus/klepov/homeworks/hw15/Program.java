@@ -15,14 +15,14 @@ import java.nio.charset.StandardCharsets;
 public class Program {
     public static void main(String[] args) throws IOException {
         var newFile = "newSms.json";
-        var oldFile = "newSms.json";
+        var oldFile = "sms.json";
         var s = new SmsDataSerializer();
         var sNew = new NewSmsDataSerializer();
         var df = new NewSmsDataFactory();
         var path = new File(Resources.getResource(oldFile).getFile()).getParent();
         FileWriter writer = new FileWriter(new File(path, newFile));
         var res = Utils
-            .readFile("sms.json")
+            .readFile(oldFile)
                 .flatMap(s::deserialize)
                 .map(df::makeSmsData)
                 .map(o -> sNew.serialize(writer, o))
