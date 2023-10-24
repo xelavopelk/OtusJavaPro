@@ -2,15 +2,16 @@ package ru.otus.klepov.homeworks.hw15.domain.newdto;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import java.time.Instant;
+
 
 public class NewMessage {
     @SerializedName("send_date")
-    public java.util.Date SendDate;
+    public Instant SendDate;
     @SerializedName("text")
     public String Text;
     public NewMessage() {};
-    public NewMessage(Date sendDate, String text) {
+    public NewMessage(Instant sendDate, String text) {
         this.SendDate=sendDate;
         this.Text=text;
     }

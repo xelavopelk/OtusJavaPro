@@ -1,5 +1,7 @@
 package ru.otus.klepov.homeworks.hw15.domain.olddto;
 import com.google.gson.annotations.SerializedName;
+
+import java.time.Instant;
 import java.util.UUID;
 
 public class Message {
@@ -10,9 +12,9 @@ public class Message {
     @SerializedName("belong_number")
     public String BelongNumber;
     @SerializedName("date")
-    public java.util.Date Date;
+    public Instant Date;
     @SerializedName("date_read")
-    public java.util.Date DateRead;
+    public Instant DateRead;
     @SerializedName("guid")
     public UUID Guid;
     @SerializedName("handle_id")
@@ -24,7 +26,7 @@ public class Message {
     @SerializedName("is_from_me")
     public Boolean IsFromMe;
     @SerializedName("send_date")
-    public java.util.Date SendDate;
+    public Instant SendDate;
     @SerializedName("send_status")
     public Integer SendStatus;
     @SerializedName("service")

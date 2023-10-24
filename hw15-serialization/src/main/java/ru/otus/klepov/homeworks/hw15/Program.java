@@ -9,8 +9,6 @@ import ru.otus.klepov.homeworks.hw15.service.Utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class Program {
     public static void main(String[] args) throws IOException {
