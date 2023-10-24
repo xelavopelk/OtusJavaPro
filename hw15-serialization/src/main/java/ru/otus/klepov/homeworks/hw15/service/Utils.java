@@ -1,6 +1,7 @@
 package ru.otus.klepov.homeworks.hw15.service;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import com.google.protobuf.Timestamp;
 import io.vavr.control.Either;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +30,13 @@ public class Utils {
         ZoneId zoneId = ZoneId.of(zone);
         ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
         return zonedDateTime.toInstant();
+    }
 
+    public static Timestamp timestampFromInstant(Instant time) {
+        return Timestamp
+                .newBuilder()
+                .setSeconds(time.getEpochSecond())
+                .setNanos(time.getNano())
+                .build();
     }
 }

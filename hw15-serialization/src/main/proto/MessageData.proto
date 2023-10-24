@@ -1,0 +1,9 @@
+syntax = "proto3";
+option java_package = "ru.otus.klepov.homeworks.hw15.domain.newdto.pb";
+package ru.otus.klepov.homeworks.hw15.domain.newdto;
+import "google/protobuf/timestamp.proto";
+
+message MessageData {
+  string text = 1;
+  google.protobuf.Timestamp send_date = 2;
+}

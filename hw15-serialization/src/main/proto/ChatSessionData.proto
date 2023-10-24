@@ -1,0 +1,12 @@
+syntax = "proto3";
+option java_package = "ru.otus.klepov.homeworks.hw15.domain.newdto.pb";
+package ru.otus.klepov.homeworks.hw15.domain.newdto;
+import "NumberData.proto";
+import "google/protobuf/timestamp.proto";
+
+
+message ChatSessionData {
+  string chat_identifier = 1;
+  repeated string last = 2;
+  repeated NumberData number_data = 3;
+}
