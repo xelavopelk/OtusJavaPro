@@ -4,11 +4,12 @@ import com.google.common.io.Resources;
 import ru.otus.klepov.homeworks.hw15.service.*;
 
 import java.io.*;
+import java.util.logging.Logger;
 
 public class Program {
 
-    private static void jsonFlow() throws IOException {
-        System.out.println("start JSON flow");
+    private static void jsonFlow(Logger log) throws IOException {
+        log.info("start JSON flow");
         var newFile = "newSms.json";
         var oldFile = "sms.json";
         var s = new SmsDataSerializer();
@@ -23,17 +24,16 @@ public class Program {
                 .map(o -> sNew.serialize(writer, o))
                 .flatMap(r -> Utils.readFile(newFile))
                 .flatMap(sNew::deserialize);
-        if(res.isRight()) {
-            System.out.println(String.format("session count=%d", res.get().sessions.size()));
+        if (res.isRight()) {
+            log.info(String.format("session count=%d", res.get().sessions.size()));
+        } else {
+            log.info(String.format("shit happens=%s", res.getLeft().getCause()));
         }
-        else {
-            System.out.println(String.format("shit happens=%s", res.getLeft().getCause()));
-        }
-        System.out.println("finish JSON flow");
+        log.info("finish JSON flow");
     }
 
-    private static void protobufFlow() throws IOException {
-        System.out.println("start Protobuf flow");
+    private static void protobufFlow(Logger log) throws IOException {
+        log.info("start Protobuf flow");
         var newFile = "newSms.bin";
         var oldFile = "sms.json";
         var s = new SmsDataSerializer();
@@ -50,18 +50,18 @@ public class Program {
                 .map(pdf::makeSmsData)
                 .map(o -> sNew.serialize(writer, o))
                 .flatMap(r -> sNew.deserialize(reader));
-        if(res.isRight()) {
-            System.out.println(String.format("session count=%d", res.get().getChatSessionCount()));
+        if (res.isRight()) {
+            log.info(String.format("session count=%d", res.get().getChatSessionCount()));
+        } else {
+            log.info(String.format("shit happens=%s", res.getLeft().getCause()));
         }
-        else {
-            System.out.println(String.format("shit happens=%s", res.getLeft().getCause()));
-        }
-        System.out.println("finish Protobuf flow");
+        log.info("finish Protobuf flow");
     }
 
 
     public static void main(String[] args) throws IOException {
-        jsonFlow();
-        protobufFlow();
+        var log = Logger.getLogger(Program.class.getName());
+        jsonFlow(log);
+        protobufFlow(log);
     }
 }
