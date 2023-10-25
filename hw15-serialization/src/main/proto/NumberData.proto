@@ -1,0 +1,9 @@
+syntax = "proto3";
+option java_package = "ru.otus.klepov.homeworks.hw15.domain.newdto.pb";
+package ru.otus.klepov.homeworks.hw15.domain.newdto;
+import "MessageData.proto";
+
+message NumberData {
+  string belong_number = 1;
+  repeated MessageData message_data = 2;
+}
