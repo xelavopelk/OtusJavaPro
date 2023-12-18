@@ -1,0 +1,58 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'java'
+}
+
+group 'ru.otus.klepov'
+version '0.0.1'
+
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    implementation platform("io.helidon:helidon-dependencies:4.0.1")
+    implementation 'io.helidon.webserver:helidon-webserver'
+    implementation 'io.helidon.config:helidon-config-yaml'
+    implementation 'io.helidon.openapi:helidon-openapi'
+    implementation 'io.helidon.integrations.openapi-ui:helidon-integrations-openapi-ui'
+    implementation 'io.helidon.health:helidon-health-checks'
+    implementation 'io.helidon.http.media:helidon-http-media-jsonp'
+    implementation 'io.helidon.logging:helidon-logging-jul'
+    implementation 'io.helidon.scheduling:helidon-scheduling'
+    implementation 'io.helidon.webserver:helidon-webserver-json:0.11.0'
+    implementation 'jakarta.json:jakarta.json-api:2.1.3'
+    implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.0'
+    implementation 'io.smallrye:smallrye-open-api-ui:3.7.0'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.guava:guava:32.1.3-jre'
+
+    implementation project(':hw21-cacheHelidon')
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+shadowJar {
+    archiveBaseName.set('cacheHelidon')
+    archiveVersion.set('0.1')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': 'ru.klepov.cacheHelidon.api.Program'
+    }
+}
+tasks.build.dependsOn tasks.shadowJar
+
+
+
+test {
+    useJUnitPlatform()
+}

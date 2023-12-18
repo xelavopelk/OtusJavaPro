@@ -46,3 +46,6 @@ bin/
 *.iws
 *.ipr
 *.idea 
+
+#tmp
+dump.json
