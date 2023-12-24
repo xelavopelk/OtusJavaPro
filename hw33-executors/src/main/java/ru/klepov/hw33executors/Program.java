@@ -25,6 +25,60 @@ public class Program
 
     private static Logger LOG = LoggerFactory.getLogger(Program.class);
 
+    private Runnable runnable1 = () -> {
+        var currentChange = 0;
+        while (true) {
+            try {
+                Thread.sleep(SLEEP_INTERVAL);
+            } catch (InterruptedException e) {
+                LOG.error(e.getStackTrace().toString());
+            }
+            lock.lock();
+            try {
+                if (currentThread == 0) {
+                    curVal += currentChange;
+                    LOG.info(String.valueOf(curVal));
+                    currentThread = 1;
+                    if (currentChange == 0) {
+                        currentChange = 1;
+                    } else if (curVal == MAX_VAL || curVal == 1) {
+                        currentChange *= -1;
+                    }
+                }
+                possible1.signal();
+                possible0.await();
+            } catch (InterruptedException e) {
+                LOG.error(e.getStackTrace().toString());
+            } finally {
+                lock.unlock();
+            }
+        }
+    };
+
+    Runnable runnable2 = () -> {
+        while (true) {
+            try {
+                Thread.sleep(SLEEP_INTERVAL);
+            } catch (InterruptedException e) {
+                LOG.error(e.getStackTrace().toString());
+            }
+            lock.lock();
+            try {
+                if (currentThread == 1) {
+                    LOG.info(String.valueOf(curVal));
+                    currentThread = 0;
+                }
+                possible0.signal();
+                possible1.await();
+            } catch (InterruptedException e) {
+                LOG.error(e.getStackTrace().toString());
+            } finally {
+                lock.unlock();
+            }
+        }
+    };
+
+
     public static void main(String[] args) {
         LOG.info("STARTING THE APPLICATION");
         SpringApplication.run(Program.class, args);
@@ -35,59 +89,6 @@ public class Program
     public void run(String... args) throws InterruptedException {
         LOG.info("EXECUTING : command line runner");
         curVal = 1;
-        Runnable runnable1 = () -> {
-            var currentChange = 0;
-            while (true) {
-                try {
-                    Thread.sleep(SLEEP_INTERVAL);
-                } catch (InterruptedException e) {
-                    LOG.error(e.getStackTrace().toString());
-                }
-                lock.lock();
-                try {
-                    if (currentThread == 0) {
-                        curVal += currentChange;
-                        LOG.info(String.valueOf(curVal));
-                        currentThread = 1;
-                        if (currentChange == 0) {
-                            currentChange = 1;
-                        } else if (curVal == MAX_VAL || curVal == 1) {
-                            currentChange *= -1;
-                        }
-                    }
-                    possible1.signal();
-                    possible0.await();
-                } catch (InterruptedException e) {
-                    LOG.error(e.getStackTrace().toString());
-                } finally {
-                    lock.unlock();
-                }
-            }
-        };
-
-        Runnable runnable2 = () -> {
-            while (true) {
-                try {
-                    Thread.sleep(SLEEP_INTERVAL);
-                } catch (InterruptedException e) {
-                    LOG.error(e.getStackTrace().toString());
-                }
-                lock.lock();
-                try {
-                    if (currentThread == 1) {
-                        LOG.info(String.valueOf(curVal));
-                        currentThread = 0;
-                    }
-                    possible0.signal();
-                    possible1.await();
-                } catch (InterruptedException e) {
-                    LOG.error(e.getStackTrace().toString());
-                } finally {
-                    lock.unlock();
-                }
-            }
-        };
-
 
         Thread t0 = new Thread(runnable1);
         Thread t1 = new Thread(runnable2);
