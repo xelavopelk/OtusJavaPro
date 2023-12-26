@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -14,16 +15,17 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Program
         implements CommandLineRunner {
 
-    public int curVal;
-    private int MAX_VAL = 10;
+    private final Integer SLEEP_INTERVAL = 500;
+    private final int MAX_VAL = 10;
     private Integer currentThread = 0;
-    private Integer SLEEP_INTERVAL = 500; //это чтобы видно было вывод
+    private  int curVal;
+
 
     private Lock lock = new ReentrantLock();
     private final Condition possible0 = lock.newCondition();
     private final Condition possible1 = lock.newCondition();
 
-    private static Logger LOG = LoggerFactory.getLogger(Program.class);
+    private static Logger log = LoggerFactory.getLogger(Program.class);
 
     private Runnable runnable1 = () -> {
         var currentChange = 0;
@@ -31,13 +33,14 @@ public class Program
             try {
                 Thread.sleep(SLEEP_INTERVAL);
             } catch (InterruptedException e) {
-                LOG.error(e.getStackTrace().toString());
+                log.error(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
             }
             lock.lock();
             try {
                 if (currentThread == 0) {
                     curVal += currentChange;
-                    LOG.info(String.valueOf(curVal));
+                    log.info(String.valueOf(curVal));
                     currentThread = 1;
                     if (currentChange == 0) {
                         currentChange = 1;
@@ -48,7 +51,8 @@ public class Program
                 possible1.signal();
                 possible0.await();
             } catch (InterruptedException e) {
-                LOG.error(e.getStackTrace().toString());
+                log.error(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
             } finally {
                 lock.unlock();
             }
@@ -60,18 +64,20 @@ public class Program
             try {
                 Thread.sleep(SLEEP_INTERVAL);
             } catch (InterruptedException e) {
-                LOG.error(e.getStackTrace().toString());
+                log.error(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
             }
             lock.lock();
             try {
                 if (currentThread == 1) {
-                    LOG.info(String.valueOf(curVal));
+                    log.info(String.valueOf(curVal));
                     currentThread = 0;
                 }
                 possible0.signal();
                 possible1.await();
             } catch (InterruptedException e) {
-                LOG.error(e.getStackTrace().toString());
+                log.error(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
             } finally {
                 lock.unlock();
             }
@@ -80,14 +86,14 @@ public class Program
 
 
     public static void main(String[] args) {
-        LOG.info("STARTING THE APPLICATION");
+        log.info("STARTING THE APPLICATION");
         SpringApplication.run(Program.class, args);
-        LOG.info("APPLICATION FINISHED");
+        log.info("APPLICATION FINISHED");
     }
 
     @Override
     public void run(String... args) throws InterruptedException {
-        LOG.info("EXECUTING : command line runner");
+        log.info("EXECUTING : command line runner");
         curVal = 1;
 
         Thread t0 = new Thread(runnable1);
