@@ -1,0 +1,15 @@
+0) генерация сертификата
+keystore:
+
+keytool -genkeypair -alias klepov -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore testklepovstore.p12 -validity 365 -ext "SAN:c=DNS:localhost,IP:127.0.0.1"
+
+truststore
+keytool -importcert -storetype PKCS12 -keystore truststore.p12 -alias klepov -file localhost.crt
+
+1) docker
+
+сборка образа inner
+docker build -t simplerest:v1 .
+
+запуск образа inner
+docker container run -p 18189:8189 -d simplerest:v1

@@ -1,0 +1,19 @@
+
+server:
+  port: 8191
+  servlet:
+    context-path: /srv
+client:
+  ssl:
+    trust-store-path: classpath:truststore.p12
+    trust-store-password: 161180
+    trust-store-type: PKCS12
+
+internalservice:
+  url: https://localhost
+  port: 18189
+  timeout: 10
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: TRACE
