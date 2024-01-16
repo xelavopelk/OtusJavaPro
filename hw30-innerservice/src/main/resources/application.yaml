@@ -1,0 +1,20 @@
+
+server:
+  port: 8189
+  servlet:
+    context-path: /app
+  ssl:
+    # The format used for the keystore. It could be set to JKS in case it is a JKS file
+    key-store-type: PKCS12
+    # The path to the keystore containing the certificate
+    key-store: classpath:keystore/testklepovstore.p12
+    # The password used to generate the certificate
+    key-store-password: 161180
+    # The alias mapped to the certificate
+    key-alias: klepov
+    enabled: true
+
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: TRACE
