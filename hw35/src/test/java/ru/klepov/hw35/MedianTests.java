@@ -114,4 +114,40 @@ public class MedianTests {
         assertEquals(1.5, data.getMedian());
     }
 
+
+    @Test
+    public void median5Items1RepeatedSuccess() {
+        var data = new MedianList();
+        data.add(1.0);
+        data.add(2.0);
+        data.add(0.0);
+        data.add(-1.0);
+        data.add(2.0);
+        assertTrue(data.checkConstraints());
+        assertEquals(1.0, data.getMedian());
+    }
+
+    @Test
+    public void median4ItemsRepeatedSuccess() {
+        var data = new MedianList();
+        data.add(1.0);
+        data.add(2.0);
+        data.add(2.0);
+        data.add(1.0);
+        assertTrue(data.checkConstraints());
+        assertEquals(1.5, data.getMedian());
+    }
+
+    @Test
+    public void median4ItemsAllRepeatedSuccess() {
+        var data = new MedianList();
+        data.add(3.0);
+        data.add(3.0);
+        data.add(3.0);
+        data.add(3.0);
+        assertTrue(data.checkConstraints());
+        assertEquals(3.0, data.getMedian());
+    }
+
+
 }

@@ -35,10 +35,9 @@ public class NonUniqueTreeMap<T extends Number & Comparable> {
             return Optional.empty();
         } else {
             var v = selector.get();
-            if(0==v.getValue()) {
+            if (0 == v.getValue()) {
                 return Optional.empty();
-            }
-            else {
+            } else {
                 if (v.getValue() == 1) {
                     tree.remove(v.getKey());
                 } else {
@@ -53,7 +52,7 @@ public class NonUniqueTreeMap<T extends Number & Comparable> {
     public void remove(T val) {
         Supplier<Map.Entry<T, Integer>> supplier = () -> {
             var r = tree.get(val);
-            return new AbstractMap.SimpleEntry<T, Integer>(val, null == r ? 0 : r );
+            return new AbstractMap.SimpleEntry<T, Integer>(val, null == r ? 0 : r);
         };
 
         take(supplier);
