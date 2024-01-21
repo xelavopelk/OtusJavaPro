@@ -1,5 +1,0 @@
-сборка образа node
-docker build -t hw36-node:v1 .
-
-сборка образа loadbalancer
-docker build -t hw36-loadbalancer:v1 .

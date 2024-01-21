@@ -4,10 +4,23 @@ services:
   node:
     image: hw36-node:v1
     environment:
-      BALANCER: "balanceruri"
-    ports:
-      - "18189:8189"
+      NODE_BALANCER: "balancer"
+      PORT_BALANCER: 8191
+      SUCCESS_RATE: 50
+    deploy:
+      mode: replicated
+      replicas: 2
+
   loadbalancer:
     image: hw36-loadbalancer:v1
+    container_name: balancer
+    hostname: balancer
     ports:
       - "18191:8191"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24

@@ -2,12 +2,14 @@ package ru.klepov.hw36.node;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class Program {
+@EnableScheduling
+public class NodeProgram {
 
     public static void main(String[] args) {
-        SpringApplication.run(Program.class, args);
+        SpringApplication.run(NodeProgram.class, args);
     }
 
 }

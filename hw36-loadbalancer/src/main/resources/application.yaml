@@ -2,6 +2,8 @@ server:
   port: 8191
   servlet:
     context-path: /lb
+nodes:
+  port: 8189
 
 logging:
   level:
