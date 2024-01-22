@@ -49,3 +49,9 @@ bin/
 
 #tmp
 dump.json
+
+#vaadin front
+hw36-front/.gradle
+hw36-front/build
+hw36-front/gradle
+hw36-front/frontend/generated

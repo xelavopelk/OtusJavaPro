@@ -1,3 +1,12 @@
+pluginManagement {
+  repositories {
+      maven { url = 'https://maven.vaadin.com/vaadin-prereleases' }
+      gradlePluginPortal()
+  }
+  plugins {
+      id 'com.vaadin' version "${vaadinVersion}"
+  }
+} 
 rootProject.name = 'OtusJavaPro'
 include 'hw01-gradle'
 include 'hw03-generics'
@@ -10,4 +19,5 @@ include 'hw30-externalservice'
 include 'hw33-executors'
 include 'hw36-node'
 include 'hw36-loadbalancer'
+include 'hw36-front'
 

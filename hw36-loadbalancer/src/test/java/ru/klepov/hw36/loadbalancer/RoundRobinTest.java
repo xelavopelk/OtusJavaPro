@@ -10,15 +10,15 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RoundRobinTest {
+class RoundRobinTest {
     @Test
-    public void emptyTestSuccess() {
+    void emptyTestSuccess() {
         var rl = new RoundRobinList<Integer>();
         assertEquals(Optional.empty(), rl.getNext());
     }
 
     @Test
-    public void emptyTestRoundSuccess() {
+    void emptyTestRoundSuccess() {
         var rl = new RoundRobinList<Integer>();
         var data = Arrays.asList(1, 2, 3, 4, 5);
         data.forEach(rl::add);
@@ -30,7 +30,7 @@ public class RoundRobinTest {
     }
 
     @Test
-    public void emptyTestRemove1Success() {
+    void emptyTestRemove1Success() {
         var rl = new RoundRobinList<Integer>();
         var data = Arrays.asList(1, 2, 3, 4, 5);
         data.forEach(rl::add);
@@ -43,7 +43,7 @@ public class RoundRobinTest {
     }
 
     @Test
-    public void emptyTestRemove2Success() {
+    void emptyTestRemove2Success() {
         var rl = new RoundRobinList<Integer>();
         var data = Arrays.asList(1, 2, 3, 4, 5);
         data.forEach(rl::add);
@@ -56,7 +56,7 @@ public class RoundRobinTest {
     }
 
     @Test
-    public void emptyTestRemoveAllSuccess() {
+    void emptyTestRemoveAllSuccess() {
         var rl = new RoundRobinList<Integer>();
         var data = Arrays.asList(1, 2, 3, 4, 5);
         data.forEach(rl::add);
@@ -68,7 +68,7 @@ public class RoundRobinTest {
     }
 
     @Test
-    public void emptyTestRemoveFirstSuccess() {
+    void emptyTestRemoveFirstSuccess() {
         var rl = new RoundRobinList<Integer>();
         var data = Arrays.asList(1, 2, 3, 4, 5);
         data.forEach(rl::add);

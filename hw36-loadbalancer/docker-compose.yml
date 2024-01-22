@@ -17,6 +17,15 @@ services:
     hostname: balancer
     ports:
       - "18191:8191"
+  front:
+    image: hw36-front:v1
+    environment:
+      NODE_BALANCER: "balancer"
+      PORT_BALANCER: 8191
+    container_name: front
+    hostname: front
+    ports:
+      - "18080:8080"
 
 networks:
   default:
