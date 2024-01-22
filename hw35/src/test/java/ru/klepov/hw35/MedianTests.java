@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MedianTests {
+class MedianTests {
     @Test
-    public void medianEmptySuccess() {
+    void medianEmptySuccess() {
         var data = new MedianList();
         assertTrue(data.checkConstraints());
         assertEquals(Double.NaN, data.getMedian());
     }
 
     @Test
-    public void medianOneSuccess() {
+    void medianOneSuccess() {
         var data = new MedianList();
         data.add(1.0);
         assertTrue(data.checkConstraints());
@@ -21,7 +21,7 @@ public class MedianTests {
     }
 
     @Test
-    public void medianOneRightSuccess() {
+    void medianOneRightSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -31,7 +31,7 @@ public class MedianTests {
     }
 
     @Test
-    public void medianOneLeftSuccess() {
+    void medianOneLeftSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -41,7 +41,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median5ItemsSuccess() {
+    void median5ItemsSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -53,7 +53,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median5ItemsRemoveLeftSuccess() {
+    void median5ItemsRemoveLeftSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -66,7 +66,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median5ItemsRemoveRightSuccess() {
+    void median5ItemsRemoveRightSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -80,7 +80,7 @@ public class MedianTests {
 
 
     @Test
-    public void median4ItemsSuccess() {
+    void median4ItemsSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -91,7 +91,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median4ItemsNoRemoveSuccess() {
+    void median4ItemsNoRemoveSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -103,7 +103,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median4ItemsRemoveSuccess() {
+    void median4ItemsRemoveSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -116,7 +116,7 @@ public class MedianTests {
 
 
     @Test
-    public void median5Items1RepeatedSuccess() {
+    void median5Items1RepeatedSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -128,7 +128,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median4ItemsRepeatedSuccess() {
+    void median4ItemsRepeatedSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -139,7 +139,7 @@ public class MedianTests {
     }
 
     @Test
-    public void median4ItemsAllRepeatedSuccess() {
+    void median4ItemsAllRepeatedSuccess() {
         var data = new MedianList();
         data.add(3.0);
         data.add(3.0);

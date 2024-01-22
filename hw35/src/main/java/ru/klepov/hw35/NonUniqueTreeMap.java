@@ -31,7 +31,7 @@ public class NonUniqueTreeMap<T extends Number & Comparable> {
     }
 
     private Optional<T> take(Supplier<Map.Entry<T, Integer>> selector) {
-        if (tree.size() == 0) {
+        if (tree.isEmpty()) {
             return Optional.empty();
         } else {
             var v = selector.get();
@@ -67,7 +67,7 @@ public class NonUniqueTreeMap<T extends Number & Comparable> {
     }
 
     public Optional<T> getFirst() {
-        if (tree.size() == 0) {
+        if (tree.isEmpty()) {
             return Optional.empty();
         } else {
             return Optional.of(tree.firstEntry().getKey());

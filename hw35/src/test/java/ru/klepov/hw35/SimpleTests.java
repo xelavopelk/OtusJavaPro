@@ -9,15 +9,15 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SimpleTests {
+class SimpleTests {
     @Test
-    public void emptySizeSuccess() {
+    void emptySizeSuccess() {
         var data = new MedianList();
         assertEquals(0, data.size());
     }
 
     @Test
-    public void twoItemSizeSuccess() {
+    void twoItemSizeSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -26,7 +26,7 @@ public class SimpleTests {
     }
 
     @Test
-    public void twoItemOneRemainedSuccess() {
+    void twoItemOneRemainedSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -36,7 +36,7 @@ public class SimpleTests {
     }
 
     @Test
-    public void twoItemRemoveNotExistsSuccess() {
+    void twoItemRemoveNotExistsSuccess() {
         var data = new MedianList();
         data.add(1.0);
         data.add(2.0);
@@ -46,7 +46,7 @@ public class SimpleTests {
     }
 
     @Test
-    public void removeAllSuccess() {
+    void removeAllSuccess() {
         List<Double> test = Arrays.asList(new Double[]{1.0, 3.0, 5.0, 7.0, 10.0});
         var data = new MedianList();
         test.forEach(data::add);
@@ -56,7 +56,7 @@ public class SimpleTests {
     }
 
     @Test
-    public void muchItemsSuccess() {
+    void muchItemsSuccess() {
         var size = 10_000;
         var ml = new MedianList();
         var testData = Stream.generate(ThreadLocalRandom.current()::nextDouble)

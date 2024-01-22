@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 @State(Scope.Benchmark)
 public class MedianBenchmark {
 
-    private final int treeSize = 5_000_000;
+    private static final int TREE_SIZE= 5_000_000;
     private MedianList ml;
     private List<Double> testData;
 
@@ -19,7 +19,7 @@ public class MedianBenchmark {
     public void setup() {
         ml = new MedianList();
         testData = Stream.generate(ThreadLocalRandom.current()::nextDouble)
-                .limit(treeSize)
+                .limit(TREE_SIZE)
                 .toList();
     }
 
@@ -28,7 +28,7 @@ public class MedianBenchmark {
     @BenchmarkMode(Mode.AverageTime)
     public void testAddRemove(Blackhole bh) {
         testData.forEach(ml::add);
-        testData.stream().limit(treeSize / 2).forEach((item) -> {
+        testData.stream().limit(TREE_SIZE / 2).forEach((item) -> {
             ml.getMedian();
             ml.remove(item);
         });

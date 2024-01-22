@@ -2,10 +2,11 @@ package ru.klepov.hw35;
 
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-//Правки к условию задачи: из обучательного чата в телеге:
-// Я: Как сравнивать Number?
-// Чередник: Ограничений нет. Можно даже вообще убрать шаблон и использовать только double.
+/**
+* Правки к условию задачи: из обучательного чата в телеге:
+* Я: Как сравнивать Number?
+* Чередник: Ограничений нет. Можно даже вообще убрать шаблон и использовать только double.
+*/
 public final class MedianList {
     private final NonUniqueTreeMap<Double> left;
     private final NonUniqueTreeMap<Double> right;
@@ -28,7 +29,7 @@ public final class MedianList {
     public void add(Double item) {
         lock.writeLock().lock();
         try {
-            _add(item);
+            innerAdd(item);
         } finally {
             lock.writeLock().unlock();
         }
@@ -37,7 +38,7 @@ public final class MedianList {
     public void remove(Double item) {
         lock.writeLock().lock();
         try {
-            _remove(item);
+            innerRemove(item);
         } finally {
             lock.writeLock().unlock();
         }
@@ -46,13 +47,13 @@ public final class MedianList {
     public double getMedian() {
         lock.readLock().lock();
         try {
-            return _getMedian();
+            return innerGetMedian();
         } finally {
             lock.readLock().unlock();
         }
     }
 
-    private void _add(Double item) {
+    private void innerAdd(Double item) {
         if (0 == left.size() && left.size() == right.size()) {
             left.put(item);
         } else if (left.size() <= right.size()) {
@@ -74,7 +75,7 @@ public final class MedianList {
         }
     }
 
-    private void _remove(Double item) {
+    private void innerRemove(Double item) {
         if (left.size() > 0 || right.size() > 0) {
             if (left.size() == 0) {
                 right.remove(item);
@@ -108,15 +109,14 @@ public final class MedianList {
         }
     }
 
-    private double _getMedian() {
+    private double innerGetMedian() {
         if (size() == 0) {
             return Double.NaN;
         } else {
             if (left.size() == right.size()) {
                 var l = left.getLast();
                 var r = right.getFirst();
-                var res = ((l.isPresent() ? l.get() : 0.0) + (r.isPresent() ? r.get() : 0.0)) / 2.0;
-                return res;
+                return ((l.orElse(0.0)) + (r.orElse(0.0))) / 2.0;
             } else if (left.size() > right.size()) {
                 return left.getLast().get();
             } else {
