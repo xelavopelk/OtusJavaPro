@@ -13,7 +13,7 @@ public class RoundRobinList<T> {
     }
 
     public Optional<T> getNext() {
-        if (0 == list.size()) {
+        if (list.isEmpty()) {
             return Optional.empty();
         } else {
             var current = Optional.of(list.get(pointer));
@@ -27,11 +27,10 @@ public class RoundRobinList<T> {
     }
 
     public void add(T item) {
-        if (null != item) {
-            if (!list.contains(item)) {
-                list.add(item);
-            }
+        if (item == null || list.contains(item)) {
+            return;
         }
+        list.add(item);
     }
 
     public void remove(T item) {

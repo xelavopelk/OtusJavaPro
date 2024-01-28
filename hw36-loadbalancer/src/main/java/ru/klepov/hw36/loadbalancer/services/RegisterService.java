@@ -22,11 +22,11 @@ public class RegisterService {
         this.lock = new ReentrantReadWriteLock();
     }
 
-    public RegistryItem register(String host) {
+    public RegistryItem register(String host, Integer port) {
         lock.writeLock().lock();
         try {
             if (!registry.containsKey(host)) {
-                var item = new RegistryItem(host, Instant.now(), 0);
+                var item = new RegistryItem(host, Instant.now(), 0, port);
                 nexter.add(item);
                 registry.put(host, item);
             }
@@ -61,7 +61,7 @@ public class RegisterService {
         }
     }
 
-    public Optional<String> getNext() {
+    public Optional<RegistryItem> getNext() {
         lock.writeLock().lock();
         try {
             var res = nexter.getNext();
@@ -69,7 +69,7 @@ public class RegisterService {
                 return Optional.empty();
             } else {
                 registry.get(res.get().getHost()).incrementCounter();
-                return Optional.of(res.get().getHost());
+                return Optional.of(res.get());
             }
         } finally {
             lock.writeLock().unlock();

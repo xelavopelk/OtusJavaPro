@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import ru.klepov.hw36.node.entities.NodeConfig;
 import ru.klepov.hw36.node.entities.RegisterRequest;
 import ru.klepov.hw36.node.entities.RegisterResponse;
 import ru.klepov.hw36.node.entities.SrvConfig;
@@ -18,10 +19,12 @@ public class BalancerService {
 
     private final SrvConfig config;
     private final WebClient client;
+    private final NodeConfig nodeConfig;
 
-    public BalancerService(SrvConfig config, WebClient client) {
+    public BalancerService(SrvConfig config, WebClient client, NodeConfig nodeConfig) {
         this.config = config;
         this.client = client;
+        this.nodeConfig = nodeConfig;
     }
 
     @Scheduled(fixedDelayString = "${server.register-interval}")
@@ -31,7 +34,7 @@ public class BalancerService {
             client.post()
                     .uri("/lb/api/registry")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(Mono.just(new RegisterRequest(config.getHostname())), RegisterRequest.class)
+                    .body(Mono.just(new RegisterRequest(config.getHostname(),nodeConfig.getPort())), RegisterRequest.class)
                     .retrieve()
                     .bodyToMono(RegisterResponse.class)
                     .block();

@@ -25,8 +25,8 @@ public class RegistryController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request) {
         logger.info(String.format("Try register '%s'", request.getHostName()));
-        var ri = registry.register(request.getHostName());
-        RegisterResponse res = new RegisterResponse(ri.getRegisterTime());
+        var registryItem = registry.register(request.getHostName(), request.getHostPort());
+        RegisterResponse res = new RegisterResponse(registryItem.getRegisterTime());
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
