@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  node:
+    image: hw36-node:v1
+    environment:
+      NODE_BALANCER: "balancer"
+      PORT_BALANCER: 8191
+      SUCCESS_RATE: 50
+    deploy:
+      mode: replicated
+      replicas: 2
+
+  loadbalancer:
+    image: hw36-loadbalancer:v1
+    container_name: balancer
+    hostname: balancer
+    ports:
+      - "18191:8191"
+  front:
+    image: hw36-front:v1
+    environment:
+      NODE_BALANCER: "balancer"
+      PORT_BALANCER: 8191
+    container_name: front
+    hostname: front
+    ports:
+      - "18080:8080"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24

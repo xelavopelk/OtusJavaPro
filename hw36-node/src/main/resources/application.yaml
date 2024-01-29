@@ -1,0 +1,10 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /srv
+  register-interval: 20000
+
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: TRACE
